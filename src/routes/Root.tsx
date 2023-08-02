@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 
 import MainHeader from "../UI/MainHeader/MainHeader";
 import Modal from "../components/Modal/Modal";
+import CarouselComponent from "../components/CarouselComponent/CarouselComponent";
 import Button from "../UI/Button/Button";
 import Image from "../components/Image/Image";
 import pic1 from "../assets/Gol Manzarasi (1930).jpg";
@@ -33,6 +34,7 @@ export default function App() {
         <MainHeader title={"Component with header"} />
         <Image img1={pic1} img2={pic2} />
         <Outlet />
+        <CarouselComponent img1={pic1} img2={pic2} />
       </main>
     </>
   );
