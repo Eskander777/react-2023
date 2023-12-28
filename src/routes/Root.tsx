@@ -18,10 +18,10 @@ export default function App() {
         <nav>
           <ul>
             <li>
-              <Button link={"/first/3"} title="First" />
+              <Button link={"first/3"} title="First" />
             </li>
             <li>
-              <Button link={"/second"} title="Second" />
+              <Button link={"second"} title="Second" />
             </li>
           </ul>
         </nav>
