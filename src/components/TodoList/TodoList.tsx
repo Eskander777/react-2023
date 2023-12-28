@@ -1,59 +1,21 @@
-import { useEffect, useState } from "react";
+import { FormEvent } from "react";
 import classes from "./todolist.module.scss";
+import { ToDo } from "../../utils/types";
 
-type ToDo = {
-  id: string;
-  name: string;
-  completed: boolean;
+type TodoListProps = {
+  completeTodo: (id: string) => void;
+  changeTodo: (e: EventTarget) => void;
+  addTodo: (e: FormEvent<HTMLFormElement>) => void;
+  todos: ToDo[];
 };
 
-const TODO_KEY = "TODOS";
-
-export default function TodoList() {
-  const [newTodo, setNewTodo] = useState("");
-  const [todos, setTodos] = useState<ToDo[]>(() => {
-    const lsTodos = localStorage.getItem(TODO_KEY);
-    const oldTodos = lsTodos ? JSON.parse(lsTodos) : [];
-
-    return oldTodos;
-  });
-
+export default function TodoList({
+  addTodo,
+  changeTodo,
+  completeTodo,
+  todos,
+}: TodoListProps) {
   console.log("todo render");
-
-  function addTodo(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      { id: crypto.randomUUID(), name: newTodo, completed: false },
-    ]);
-  }
-
-  function changeTodo(e: EventTarget) {
-    const target = e as HTMLInputElement;
-    const inputVal = target.value;
-
-    setNewTodo(inputVal);
-  }
-
-  function completeTodo(id: string) {
-    setTodos((prevTodos) => {
-      const updatedTodoIdx = prevTodos.findIndex((todo) => todo.id === id);
-      const updatedTodo = {
-        ...prevTodos[updatedTodoIdx],
-        completed: !prevTodos[updatedTodoIdx].completed,
-      };
-      const updatedTodos = [...prevTodos];
-      updatedTodos[updatedTodoIdx] = updatedTodo;
-
-      return updatedTodos;
-    });
-  }
-
-  useEffect(() => {
-    const todosToSet = JSON.stringify([...todos]);
-
-    localStorage.setItem(TODO_KEY, todosToSet);
-  }, [todos]);
 
   return (
     <div className={classes["todolist"]}>

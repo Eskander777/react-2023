@@ -1,6 +1,8 @@
 import classes from "./sidebar.module.scss";
 
 export default function Sidebar() {
+  console.log("sidebar render");
+
   return (
     <ul className={classes["sidebar"]}>
       <li>
