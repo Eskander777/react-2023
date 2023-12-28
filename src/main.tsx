@@ -11,9 +11,11 @@ import Second from "./routes/Second";
 import ErrorPage from "./error-page";
 import Todos from "./routes/Todos";
 
+const usedRoutes = routes();
+
 const router = createBrowserRouter([
   {
-    path: routes().index,
+    path: usedRoutes.index,
     element: <Index />,
     errorElement: <ErrorPage />,
     children: [
@@ -21,11 +23,11 @@ const router = createBrowserRouter([
         path: routes().root,
         element: <Root />,
         children: [
-          { path: routes().rootFirst, element: <First /> },
-          { path: routes().rootSecond, element: <Second /> },
+          { path: usedRoutes.rootFirst, element: <First /> },
+          { path: usedRoutes.rootSecond, element: <Second /> },
         ],
       },
-      { path: routes().todos, element: <Todos /> },
+      { path: usedRoutes.todos, element: <Todos /> },
     ],
   },
 ]);
